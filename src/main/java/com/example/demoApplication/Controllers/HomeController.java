@@ -1,35 +1,30 @@
 package com.example.demoApplication.Controllers;
 
-import java.util.List;
+import com.example.demoApplication.Models.User;
+import com.example.demoApplication.Services.spec.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.demoApplication.Models.Emp;
-import com.example.demoApplication.Models.Employe;
-import com.example.demoApplication.Services.Interfaces.*;;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/Home")
 public class HomeController {
-    
-    private final IHomeService homeService;
-
+    private final IUserService userService;
     @Autowired
-    public HomeController(IHomeService homeService){
-        this.homeService = homeService;
+    public HomeController(IUserService userService){
+        this.userService = userService;
     }
 
     @GetMapping("/hello")
-    @ResponseBody
-    public Emp hello() {
-        return homeService.getEmp();
+    public String hello() {
+        return "Welcome to Api";
     }
 
     @GetMapping("/getallemployes")
-    @ResponseBody
-    public List<Employe> getEmployes() {
-        return homeService.getEmps();
+    public User getEmployes() {
+        return userService.findByid(1);
     }
 }
